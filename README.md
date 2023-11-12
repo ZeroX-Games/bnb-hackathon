@@ -2,7 +2,7 @@
 
 ![image](https://github.com/ZeroX-Games/bnb-hackathon/assets/131199919/04aeeaa2-37ac-4653-af9f-4ecb61103810)
 
-Although people recognize NFT buzzwords like BAYC, the majority of NFTs remain underutilized, serving mainly as profile pictures and speculative assets. So, how can we breathe new life into them? In our hackathon, we’ve developed “LooT ur key,” a unique card-based game that demonstrates our innovative solution. This game revive NFT IPs by integrating inventive gaming mechanisms with Web3 Social features within the Binance Ecosystem.
+Although people recognize famous NFTs as like BAYC and Doodles, the majority of NFTs remain underutilized, serving mainly as profile pictures and speculative assets. So, how can we breathe new life into them? In our hackathon, we’ve developed “LooT ur key,” a unique card-based game that demonstrates our innovative solution. This game revive NFT IPs by integrating inventive gaming mechanisms with Web3 Social features and Greenfield storage solution within the Binance Ecosystem.
 
 ## Game Design
 
