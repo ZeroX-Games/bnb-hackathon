@@ -1,0 +1,30 @@
+{
+    "name": "mycontacts-backend-api",
+    "version": "1.0.0",
+    "description": "This is express project for my contacts backend api",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
+        "dev": "nodemon server.js"
+    },
+    "author": "Dipesh Malvia",
+    "license": "MIT",
+    "dependencies": {
+        "@bnb-chain/greenfield-js-sdk": "^1.0.2",
+        "@bnb-chain/greenfiled-file-handle": "^1.0.0",
+        "@lighthouse-web3/sdk": "^0.2.8",
+        "bcrypt": "^5.1.0",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-async-handler": "^1.2.0",
+        "get-file-object-from-local-path": "^1.0.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.6.5",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
+}
