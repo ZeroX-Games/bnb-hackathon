@@ -35,7 +35,7 @@ npm install
 node server.js
 ```
 
-1. Run Game Frontend in a separate terminal tab:
+2. Run Game Frontend in a separate terminal tab:
 
 ```
 cd frontend
