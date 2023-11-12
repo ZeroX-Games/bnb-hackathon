@@ -1,4 +1,4 @@
-# ETHOnline 2023 Hackathon Frontend
+# BNB Hackathon Istanbul Frontend
 
 ## Getting started
 

@@ -22,20 +22,6 @@ function Friends() {
   const navigate = useNavigate();
   const [friends, setFriends] = useState<any>();
 
-  async function inviteToGame() {
-    alert(
-      `You just sent an invitation on Push Chat. Ask them to log into Push Chat to receive the message! https://app.push.org/chat \n` +
-        `---------- \n` +
-        `Message Sender Address: "placeholder"\n` +
-        `---------- \n` +
-        `Message Receiver Address: "placeholder"\n` +
-        `---------- \n` +
-        `Message Content: \n` +
-        `Hello, your friend 0022533.eth / @0xmartinzerox is inviting you to play a game! Check with them to get a link to the game!`
-    );
-
-    console.log("Invite to game message:");
-  }
   useEffect(() => {
     const fetchData = async () => {
       const res = await apiClient.get<any>(
@@ -77,16 +63,26 @@ function Friends() {
               <ProfileImage src={friend.nftOwner?.image} size={160} />
               <VStack>
                 <Text as="b">{friend.name}</Text>
-                <Text>{friend.ens}</Text>
                 <HStack>
                   <Image
-                    src={assets.twitter}
+                    src={assets.bnbdomain}
                     width={30}
                     height={30}
                     borderRadius={5}
                   />
                   <Text fontWeight="medium" color="whiteAlpha.800">
-                    {friend.twitter}
+                    {friend.bnbdomain}
+                  </Text>
+                </HStack>
+                <HStack>
+                  <Image
+                    src={assets.ens}
+                    width={30}
+                    height={30}
+                    borderRadius={5}
+                  />
+                  <Text fontWeight="medium" color="whiteAlpha.800">
+                    {friend.ens}
                   </Text>
                 </HStack>
                 <HStack>
@@ -102,13 +98,13 @@ function Friends() {
                 </HStack>
                 <HStack>
                   <Image
-                    src={assets.bnbdomain}
+                    src={assets.twitter}
                     width={30}
                     height={30}
                     borderRadius={5}
                   />
                   <Text fontWeight="medium" color="whiteAlpha.800">
-                    {ellipsisLongId(friend.nextId)}
+                    {friend.twitter}
                   </Text>
                 </HStack>
               </VStack>
@@ -124,7 +120,7 @@ function Friends() {
                 >
                   View Collections
                 </Button>
-                <Button colorScheme="pink" height={50} onClick={inviteToGame}>
+                <Button colorScheme="pink" height={50}>
                   Invite to Game
                 </Button>
               </HStack>

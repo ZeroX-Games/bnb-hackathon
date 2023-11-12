@@ -18,6 +18,8 @@ import doodles6529 from "./doodles/doodles-6529.jpg";
 import doodles7975 from "./doodles/doodles-7975.jpg";
 import doodles9509 from "./doodles/doodles-9509.jpg";
 import bakc711 from "./bakc/bakc-711.jpg";
+import pancake10 from "./pancake-10.jpg";
+import pancake1025 from "./pancake-1025.jpg";
 
 const assets = {
   profile,
@@ -40,6 +42,8 @@ const assets = {
   doodles7975,
   doodles9509,
   bakc711,
+  pancake10,
+  pancake1025,
 };
 
 export { assets };

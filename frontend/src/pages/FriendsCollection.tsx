@@ -28,43 +28,16 @@ function FriendsCollection() {
   console.log(friend, nfts);
 
   async function lootCollection() {
-    // const twitterRes = await apiClient.get(
-    //   '/compare-twitter-id/0xmartinzerox/delonmusk'
-    // );
-
-    // console.log('/compare-twitter-id/0xmartinzerox/delonmusk API Response:');
-    // console.log(twitterRes);
-
-    // // Creating a random signer from a wallet, ideally this is the wallet you will connect
-    // const signer = ethers.Wallet.createRandom();
-
-    // // Initialize wallet user, pass 'prod' instead of 'staging' for mainnet apps
-    // const userAlice = await PushAPI.initialize(signer, { env: 'prod' });
-
-    // // This will be the wallet address of the recipient
-    // const bobWalletAddress = '0x7531F8b0B578610bA654f100241cC227A6E68829';
-
-    // // console.log(signer);
-
-    // // Send a message to Bob
-    // const aliceMessagesBob = await userAlice.chat.send(bobWalletAddress, {
-    //   content:
-    //     'Hello, your friend 0022533.eth / @0xmartinzerox looted your token BAKC #711 to play a game! Check with them to get a link to the game!',
-    // });
-
     alert(
-      `You just sent an invitation on Push Chat. Ask them to log into Push Chat to receive the message! https://app.push.org/chat \n` +
+      `You just sent a loot message through Polyhedra. Ask them to check the message on Polyhedra! \n` +
         `---------- \n` +
-        `Message Sender Address: placeholder \n` +
-        `---------- \n` +
-        `Message Receiver Address: placeholder \n` +
+        `Message Receiver Address: 0x7531F8b0B578610bA654f100241cC227A6E68829 \n` +
         `---------- \n` +
         `Message Content: \n` +
-        `Hello, your friend 0022533.eth / @0xmartinzerox looted your token BAKC #711 to play a game! Check with them to get a link to the game!`
+        `Hello, your friend williamhong.eth / @0xWilliamHong looted your token BAKC #711 to play a game! Check with them to get a link to the game!`
     );
 
     console.log("Looting notification:");
-    // console.log(aliceMessagesBob);
   }
 
   return (
@@ -99,16 +72,21 @@ function FriendsCollection() {
         <ProfileImage src={friend.nftOwner?.image} size={160} />
         <VStack alignItems="flex-start">
           <Text>{friend.name}</Text>
-          <Text>{friend.ens}</Text>
           <HStack>
             <Image
-              src={assets.twitter}
+              src={assets.bnbdomain}
               width={30}
               height={30}
               borderRadius={5}
             />
             <Text fontWeight="medium" color="whiteAlpha.800">
-              {friend.twitter}
+              {friend.bnbdomain}
+            </Text>
+          </HStack>
+          <HStack>
+            <Image src={assets.ens} width={30} height={30} borderRadius={5} />
+            <Text fontWeight="medium" color="whiteAlpha.800">
+              {friend.ens}
             </Text>
           </HStack>
           <HStack>
@@ -119,13 +97,13 @@ function FriendsCollection() {
           </HStack>
           <HStack>
             <Image
-              src={assets.bnbdomain}
+              src={assets.twitter}
               width={30}
               height={30}
               borderRadius={5}
             />
             <Text fontWeight="medium" color="whiteAlpha.800">
-              {friend.nextId}
+              {friend.twitter}
             </Text>
           </HStack>
         </VStack>
@@ -149,7 +127,7 @@ function FriendsCollection() {
           </HStack>
         </VStack>
         <VStack gap={5}>
-          <Text fontWeight="bold">Avatar Collections</Text>
+          <Text fontWeight="bold">Player Collections</Text>
           <ImageStack images={[nfts[2].image]} />
           <Button colorScheme="pink" height={50}>
             Loot

@@ -83,17 +83,17 @@ function MainLayout() {
             <VStack gap={1}>
               <ProfileImage src={userData?.nftsData?.image} />
               <Text fontSize="2xl" fontWeight="bold">
-                {userData?.twitterData?.identity?.displayName}
+                0xWilliamHong
               </Text>
               <HStack>
                 <Image
-                  src={assets.ens}
+                  src={assets.bnbdomain}
                   width={30}
                   height={30}
                   borderRadius={5}
                 />
                 <Text fontWeight="medium" color="whiteAlpha.800">
-                  {userData?.ensData?.[0].identity.displayName}
+                  williamhong.bnb
                 </Text>
               </HStack>
               <HStack>
@@ -104,20 +104,18 @@ function MainLayout() {
                   borderRadius={5}
                 />
                 <Text fontWeight="medium" color="whiteAlpha.800">
-                  {userData?.twitterData?.identity?.displayName}
+                  0xWilliamHong
                 </Text>
               </HStack>
               <HStack>
                 <Image
-                  src={assets.bnbdomain}
+                  src={assets.ens}
                   width={30}
                   height={30}
                   borderRadius={5}
                 />
                 <Text fontWeight="medium" color="whiteAlpha.800">
-                  {ellipsisLongId(
-                    userData?.nextIdData?.[0].identity?.displayName
-                  )}
+                  williamhong.eth
                 </Text>
               </HStack>
               <HStack gap={10}>
@@ -126,19 +124,12 @@ function MainLayout() {
                   <ImageStack images={[assets.mayc8102, assets.mayc14276]} />
                 </VStack>
                 <VStack gap={5}>
-                  <Text fontWeight="bold">Avatar Collections</Text>
+                  <Text fontWeight="bold">Player Collections</Text>
                   <ImageStack images={[assets.bayc8954, assets.bayc1463]} />
                 </VStack>
               </HStack>
             </VStack>
           ) : (
-            // <Spinner
-            //   thickness="4px"
-            //   speed="0.65s"
-            //   emptyColor="gray.200"
-            //   color="blue.500"
-            //   size="xl"
-            // />
             <></>
           )}
         </Flex>

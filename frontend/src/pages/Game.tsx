@@ -1,10 +1,10 @@
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import Button from '@/components/Button';
-import ProfileImage from '@/components/ProfileImage';
-import apiClient from '@/utils/apiClient';
+import Button from "@/components/Button";
+import ProfileImage from "@/components/ProfileImage";
+import apiClient from "@/utils/apiClient";
 import {
   Box,
   Flex,
@@ -20,27 +20,34 @@ import {
   Text,
   useDisclosure,
   VStack,
-} from '@chakra-ui/react';
-import { useDraggable } from '@dnd-kit/core';
-import { useDroppable } from '@dnd-kit/core';
-import { DndContext } from '@dnd-kit/core';
+} from "@chakra-ui/react";
+import { useDraggable } from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core";
+import { DndContext } from "@dnd-kit/core";
 
-import { assets } from '../assets';
+import { assets } from "../assets";
 
 const opponentDefault = {
-  name: 'opponent',
+  name: "opponent",
   profileImage: assets.bayc6139,
   health: 100,
-  ens: 'bustinjieber.eth',
+  ens: "bustinjieber.bnb",
   nft: {
-    name: 'BAYC',
-    id: '6139',
+    name: "BAYC",
+    id: "6139",
   },
   cards: [
     {
-      image: assets.mayc14276,
-      name: 'MAYC',
-      id: '14276',
+      image: assets.pancake10,
+      name: "Pancake #10",
+      id: "10",
+      damage: 60,
+      health: 100,
+    },
+    {
+      image: assets.mayc8102,
+      name: "MAYC #8102",
+      id: "8102",
       damage: 60,
       health: 100,
     },
@@ -48,40 +55,40 @@ const opponentDefault = {
 };
 
 const userDefault = {
-  name: 'user',
+  name: "user",
   profileImage: assets.doodles2933,
   health: 100,
-  ens: 'satoshi.eth',
+  ens: "satoshi.eth",
   nft: {
-    name: 'BAYC',
-    id: '1463',
+    name: "BAYC",
+    id: "1463",
   },
   cards: [
     {
       image: assets.bakc711,
-      name: 'BAKC',
-      id: '711',
+      name: "BAKC",
+      id: "711",
       damage: 10,
       health: 100,
     },
     {
       image: assets.mayc5361,
-      name: 'MAYC',
-      id: '5361',
+      name: "MAYC",
+      id: "5361",
       damage: 75,
       health: 100,
     },
     {
       image: assets.mayc8102,
-      name: 'MAYC',
-      id: '8102',
+      name: "MAYC",
+      id: "8102",
       damage: 20,
       health: 100,
     },
     {
       image: assets.mayc8102,
-      name: 'MAYC',
-      id: '8102',
+      name: "MAYC",
+      id: "8102",
       damage: 5,
       health: 100,
     },
@@ -105,7 +112,7 @@ function Game() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await apiClient.get(
-        '/twitter-profile-and-nfts-info/0xc6c4aaa9c6fa57fb938d864999a713bc7c72e1d1'
+        "/twitter-profile-and-nfts-info/0xc6c4aaa9c6fa57fb938d864999a713bc7c72e1d1"
       );
 
       setUserData(res);
@@ -118,16 +125,15 @@ function Game() {
 
   const handleDragEnd = (event) => {
     if (event.over && event.over.id === opponent.name) {
-      console.log('dragged', event);
+      console.log("dragged", event);
       setOpponent((prev) => {
         let health = prev.health - event.active.data.current.damage;
 
         if (health < 0) {
           health = 0;
           // display close modal
-          console.log('game end');
+          console.log("game end");
           onOpen();
-          apiClient.get('/updated-info/21/8/1358');
         }
 
         shake();
@@ -144,7 +150,7 @@ function Game() {
       x: [0, -8, 8, -6, 6, -4, 4, -2, 2, 0],
       transition: {
         duration: 0.4,
-        ease: 'easeInOut',
+        ease: "easeInOut",
       },
     });
 
@@ -177,8 +183,8 @@ function Game() {
             colorScheme="twitter"
             width={120}
             height={50}
-            onClick={() => navigate('/')}
-            style={{ fontSize: '25px' }}
+            onClick={() => navigate("/")}
+            style={{ fontSize: "25px" }}
           >
             EXIT
           </Button>
@@ -201,7 +207,7 @@ function CardsPool({ opponentCards, userCards }) {
         initial={{ opacity: 0, y: -200, x: -500 }}
         animate={{ opacity: 1, y: 0, x: 0 }}
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 100,
           damping: 15,
         }}
@@ -216,7 +222,7 @@ function CardsPool({ opponentCards, userCards }) {
         initial={{ opacity: 0, y: 200, x: -500 }}
         animate={{ opacity: 1, y: 0, x: 0 }}
         transition={{
-          type: 'spring',
+          type: "spring",
           stiffness: 100,
           damping: 15,
         }}
@@ -355,8 +361,8 @@ function ResultModal({ isOpen, onClose, user, opponent }) {
         style={{
           minWidth: 800,
           padding: 20,
-          color: 'white',
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          color: "white",
+          backgroundColor: "rgba(0, 0, 0, 0.8)",
         }}
       >
         <ModalHeader alignSelf="center">Game Summary</ModalHeader>
@@ -367,9 +373,7 @@ function ResultModal({ isOpen, onClose, user, opponent }) {
           <HStack gap={5} alignItems="center" justifyContent="space-around">
             <VStack>
               <MediumText fontSize="2xl">YOU</MediumText>
-              <MediumText>
-                Player: {user.ensData?.[0].identity?.displayName}
-              </MediumText>
+              <MediumText>Player: 0xWilliamHong</MediumText>
               <ProfileImage src={user.nftsData?.image} size={160} />
               <MediumText fontSize="lg" fontWeight="bold">
                 {user.nftsData?.name} {user.nftsData?.description}
