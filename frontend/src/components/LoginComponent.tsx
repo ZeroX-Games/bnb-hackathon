@@ -1,66 +1,63 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Web3AuthModalPack, Web3AuthConfig } from '@safe-global/auth-kit';
-import { Web3AuthOptions } from '@web3auth/modal';
-import { Web3Auth } from '@web3auth/modal';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Web3Auth } from "@web3auth/modal";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { CHAIN_NAMESPACES, IProvider } from '@web3auth/base';
+import { CHAIN_NAMESPACES, IProvider } from "@web3auth/base";
 import {
   OpenloginAdapter,
   OPENLOGIN_NETWORK,
-} from '@web3auth/openlogin-adapter';
+} from "@web3auth/openlogin-adapter";
 // import RPC from "./web3RPC"; // for using web3.js
-import RPC from '../ethersRPC'; // for using ethers.js
+import RPC from "../ethersRPC"; // for using ethers.js
 
 // Plugins
-import { TorusWalletConnectorPlugin } from '@web3auth/torus-wallet-connector-plugin';
-import { Flex, Heading } from '@chakra-ui/react';
-import { assets } from '../assets';
-import Button from '@components/Button';
+import { TorusWalletConnectorPlugin } from "@web3auth/torus-wallet-connector-plugin";
+import { Flex, Heading } from "@chakra-ui/react";
+import Button from "@components/Button";
 
 // Adapters
 // import { MetamaskAdapter } from "@web3auth/metamask-adapter";
 // import { TorusWalletAdapter } from "@web3auth/torus-evm-adapter";
 
 const clientId =
-  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'; // get from https://dashboard.web3auth.io
+  "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ"; // get from https://dashboard.web3auth.io
 
 const web3auth = new Web3Auth({
   clientId,
   chainConfig: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    chainId: '0x1',
-    rpcTarget: 'https://rpc.ankr.com/eth', // This is the public RPC we have added, please pass on your own endpoint while creating an app
+    chainId: "0x1",
+    rpcTarget: "https://rpc.ankr.com/eth", // This is the public RPC we have added, please pass on your own endpoint while creating an app
   },
   // uiConfig refers to the whitelabeling options, which is available only on Growth Plan and above
   // Please remove this parameter if you're on the Base Plan
   uiConfig: {
-    appName: 'W3A',
+    appName: "W3A",
     // appLogo: "https://web3auth.io/images/w3a-L-Favicon-1.svg", // Your App Logo Here
     theme: {
-      primary: 'red',
+      primary: "red",
     },
-    mode: 'dark',
-    logoLight: 'https://web3auth.io/images/w3a-L-Favicon-1.svg',
-    logoDark: 'https://web3auth.io/images/w3a-D-Favicon-1.svg',
-    defaultLanguage: 'en', // en, de, ja, ko, zh, es, fr, pt, nl
+    mode: "dark",
+    logoLight: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
+    logoDark: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
+    defaultLanguage: "en", // en, de, ja, ko, zh, es, fr, pt, nl
     loginGridCol: 3,
-    primaryButton: 'externalLogin', // "externalLogin" | "socialLogin" | "emailLogin"
+    primaryButton: "externalLogin", // "externalLogin" | "socialLogin" | "emailLogin"
   },
   web3AuthNetwork: OPENLOGIN_NETWORK.SAPPHIRE_MAINNET,
 });
 
 const openloginAdapter = new OpenloginAdapter({
   loginSettings: {
-    mfaLevel: 'optional',
+    mfaLevel: "optional",
   },
   adapterSettings: {
-    uxMode: 'redirect', // "redirect" | "popup"
+    uxMode: "redirect", // "redirect" | "popup"
     whiteLabel: {
-      logoLight: 'https://web3auth.io/images/w3a-L-Favicon-1.svg',
-      logoDark: 'https://web3auth.io/images/w3a-D-Favicon-1.svg',
-      defaultLanguage: 'en', // en, de, ja, ko, zh, es, fr, pt, nl
-      mode: 'dark', // whether to enable dark, light or auto mode. defaultValue: auto [ system theme]
+      logoLight: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
+      logoDark: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
+      defaultLanguage: "en", // en, de, ja, ko, zh, es, fr, pt, nl
+      mode: "dark", // whether to enable dark, light or auto mode. defaultValue: auto [ system theme]
     },
     mfaSettings: {
       deviceShareFactor: {
@@ -92,46 +89,15 @@ const torusPlugin = new TorusWalletConnectorPlugin({
   torusWalletOpts: {},
   walletInitOptions: {
     whiteLabel: {
-      theme: { isDark: true, colors: { primary: '#00a8ff' } },
-      logoDark: 'https://web3auth.io/images/w3a-L-Favicon-1.svg',
-      logoLight: 'https://web3auth.io/images/w3a-D-Favicon-1.svg',
+      theme: { isDark: true, colors: { primary: "#00a8ff" } },
+      logoDark: "https://web3auth.io/images/w3a-L-Favicon-1.svg",
+      logoLight: "https://web3auth.io/images/w3a-D-Favicon-1.svg",
     },
     useWalletConnect: true,
     enableLogging: true,
   },
 });
 web3auth.addPlugin(torusPlugin);
-
-// Safe Auth Kit
-// https://web3auth.io/docs/sdk/pnp/web/modal/initialize#arguments
-const options: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3_AUTH_CLIENT_ID', // https://dashboard.web3auth.io/
-  web3AuthNetwork: 'testnet',
-  chainConfig: {
-    chainNamespace: CHAIN_NAMESPACES.EIP155,
-    chainId: '0x5',
-    // https://chainlist.org/
-    rpcTarget: 'https://rpc.ankr.com/eth_goerli',
-  },
-  uiConfig: {
-    theme: 'dark',
-    loginMethodsOrder: ['google', 'facebook'],
-  },
-};
-
-// const web3AuthConfig: Web3AuthConfig = {
-//   txServiceUrl: 'https://safe-transaction-goerli.safe.global',
-// };
-
-// // Instantiate and initialize the pack
-// const web3AuthModalPack = new Web3AuthModalPack(web3AuthConfig);
-// await web3AuthModalPack.init({
-//   options,
-//   adapters: [openloginAdapter],
-//   modalConfig,
-// });
-
-// Safe Auth Kit -- end
 
 interface PropTypes {
   loggedIn: boolean;
@@ -142,7 +108,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
   const [provider, setProvider] = useState<IProvider | null>(null);
   // const [loggedIn, setLoggedIn] = useState(false);
 
-  console.log('logged in?' + JSON.stringify(loggedIn));
+  console.log("logged in?" + JSON.stringify(loggedIn));
 
   const navigate = useNavigate();
 
@@ -165,7 +131,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const toMainGamePage = async (providerParam) => {
     if (!providerParam) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(providerParam);
@@ -179,12 +145,12 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
       userTwitterAccountInfo: userTwitterAccountInfo,
     };
 
-    navigate('/', { state: { loginData } });
+    navigate("/", { state: { loginData } });
   };
 
   const login = async () => {
     if (!web3auth) {
-      uiConsole('web3auth not initialized yet');
+      uiConsole("web3auth not initialized yet");
       return;
     }
     const web3authProvider = await web3auth.connect();
@@ -194,7 +160,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const authenticateUser = async () => {
     if (!web3auth) {
-      uiConsole('web3auth not initialized yet');
+      uiConsole("web3auth not initialized yet");
       return;
     }
     const idToken = await web3auth.authenticateUser();
@@ -203,7 +169,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const getUserInfo = async () => {
     if (!web3auth) {
-      uiConsole('web3auth not initialized yet');
+      uiConsole("web3auth not initialized yet");
       return;
     }
     const user = await web3auth.getUserInfo();
@@ -212,7 +178,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const logout = async () => {
     if (!web3auth) {
-      uiConsole('web3auth not initialized yet');
+      uiConsole("web3auth not initialized yet");
       return;
     }
     await web3auth.logout();
@@ -222,7 +188,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const showWCM = async () => {
     if (!torusPlugin) {
-      uiConsole('torus plugin not initialized yet');
+      uiConsole("torus plugin not initialized yet");
       return;
     }
     torusPlugin.showWalletConnectScanner();
@@ -231,21 +197,21 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const initiateTopUp = async () => {
     if (!torusPlugin) {
-      uiConsole('torus plugin not initialized yet');
+      uiConsole("torus plugin not initialized yet");
       return;
     }
-    torusPlugin.initiateTopup('moonpay', {
-      selectedAddress: '0x8cFa648eBfD5736127BbaBd1d3cAe221B45AB9AF',
-      selectedCurrency: 'USD',
+    torusPlugin.initiateTopup("moonpay", {
+      selectedAddress: "0x8cFa648eBfD5736127BbaBd1d3cAe221B45AB9AF",
+      selectedCurrency: "USD",
       fiatValue: 100,
-      selectedCryptoCurrency: 'ETH',
-      chainNetwork: 'mainnet',
+      selectedCryptoCurrency: "ETH",
+      chainNetwork: "mainnet",
     });
   };
 
   const getChainId = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -255,35 +221,35 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const addChain = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const newChain = {
-      chainId: '0x5',
-      displayName: 'Goerli',
+      chainId: "0x5",
+      displayName: "Goerli",
       chainNamespace: CHAIN_NAMESPACES.EIP155,
-      tickerName: 'Goerli',
-      ticker: 'ETH',
+      tickerName: "Goerli",
+      ticker: "ETH",
       decimals: 18,
-      rpcTarget: 'https://rpc.ankr.com/eth_goerli',
-      blockExplorer: 'https://goerli.etherscan.io',
+      rpcTarget: "https://rpc.ankr.com/eth_goerli",
+      blockExplorer: "https://goerli.etherscan.io",
     };
     await web3auth.addChain(newChain);
-    uiConsole('New Chain Added');
+    uiConsole("New Chain Added");
   };
 
   const switchChain = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
-    await web3auth?.switchChain({ chainId: '0x5' });
-    uiConsole('Chain Switched');
+    await web3auth?.switchChain({ chainId: "0x5" });
+    uiConsole("Chain Switched");
   };
 
   const getAccounts = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -293,7 +259,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const getBalance = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -303,7 +269,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const sendTransaction = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -313,7 +279,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const signMessage = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -323,7 +289,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const readContract = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -333,7 +299,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const writeContract = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -343,7 +309,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const getPrivateKey = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -353,7 +319,7 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
 
   const geUserData = async () => {
     if (!provider) {
-      uiConsole('provider not initialized yet');
+      uiConsole("provider not initialized yet");
       return;
     }
     const rpc = new RPC(provider);
@@ -362,14 +328,14 @@ function LoginComponent({ loggedIn, setLoggedIn }: PropTypes) {
     const userTwitterAccountInfo = await web3auth.getUserInfo();
 
     uiConsole(
-      'Public Key: ' + publicKey,
-      'Private Key: ' + privateKey,
+      "Public Key: " + publicKey,
+      "Private Key: " + privateKey,
       userTwitterAccountInfo
     );
   };
 
   function uiConsole(...args: any[]): void {
-    const el = document.querySelector('#console>p');
+    const el = document.querySelector("#console>p");
     if (el) {
       el.innerHTML = JSON.stringify(args || {}, null, 2);
     }
