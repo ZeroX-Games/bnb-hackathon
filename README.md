@@ -10,9 +10,9 @@ Although people recognize NFT buzzwords like BAYC, the majority of NFTs remain u
 
 “LooT ur key” allows players to engage with popular NFT IPs (like BAYC) across various blockchain networks, including Ethereum, Polygon, and BNB Chain, without the necessity of owning the NFTs. Players connect via social media, such as Twitter, fostering an interactive community. Through these social connections, players can “LOOT” (under certain conditions) their friends’ NFTs for gameplay. This interaction activates our smart contract on the OPBNB, facilitating cross-chain NFT interactions and enabling on-chain announcements via the Polyhedra Network’s zkBridge. Additionally, when an NFT is looted, the friend is notified through the Polyhedra Network’s zkMessenger. This adds an exciting, interactive layer to NFT engagement with Web3 gaming.
 
-![image](https://github.com/ZeroX-Games/bnb-hackathon/assets/131199919/e8fbb28f-7763-4a73-a3cf-85eff9a386e1)
-
 ![image](https://github.com/ZeroX-Games/bnb-hackathon/assets/131199919/2fdf298f-5aa4-441a-b09a-c0c2c1c7184c)
+
+![image](https://github.com/ZeroX-Games/bnb-hackathon/assets/131199919/e8fbb28f-7763-4a73-a3cf-85eff9a386e1)
 
 ## Project Architecture
 
